@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 if [ -z "${PLUGIN_CLUSTER}" ]; then
   echo "missing cluster"
