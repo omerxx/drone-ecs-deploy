@@ -1,36 +1,13 @@
 #!/bin/bash
-set -x
 
-if [ -z "${PLUGIN_CLUSTER}" ]; then
-  echo "missing cluster"
-  exit 1
-fi
+PLUGIN_MIN=${"100":$PLUGIN_MIN}
+PLUGIN_MAX=${"200":$PLUGIN_MAX}
+PLUGIN_TIMEOUT=${"300":$PLUGIN_TIMEOUT}
+PLUGIN_AWS_REGION=${"us-east-1":$PLUGIN_AWS_REGION}
 
-if [ -z "${PLUGIN_IMAGE_NAME}" ]; then
-  echo "missing image"
-  exit 1
-fi
-
-if [ -z "${PLUGIN_SERVICE}" ]; then
-  echo "missing Service"
-  exit 1
-fi
-
-if [ -z "${PLUGIN_AWS_REGION}" ]; then
-  PLUGIN_AWS_REGION="us-east-1"
-fi
-
-if [ -z "${PLUGIN_TIMEOUT}" ]; then
-  PLUGIN_TIMEOUT="300"
-fi
-
-if [ -z "${PLUGIN_MAX}" ]; then
-  PLUGIN_MAX="200"
-fi
-
-if [ -z "${PLUGIN_MIN}" ]; then
-  PLUGIN_MIN="100"
-fi
+[ -z "${PLUGIN_CLUSTER}" ] && echo "Missing cluster" && exit 1
+[ -z "${PLUGIN_IMAGE_NAME}" ] && echo "Missing image" && exit 1
+[ -z "${PLUGIN_SERVICE}" ] && echo "Missing Service" && exit 1
 
 ecs-deploy --region "${PLUGIN_AWS_REGION}" \
            --cluster "${PLUGIN_CLUSTER}" \
